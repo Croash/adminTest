@@ -1,71 +1,85 @@
-import React from 'react'
-import {
-  BrowserRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom'
+import React from "react";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
-const Home = () => (
-  <div>
-    <h2>Home</h2>
-  </div>
-)
+const Sandwiches = () => <h2>Sandwiches</h2>;
 
-const About = () => (
+const Tacos = ({ routes }) => (
   <div>
-    <h2>About</h2>
-  </div>
-)
-
-const Topic = ({ match }) => (
-  <div>
-    <h3>{match.params.topicId}</h3>
-  </div>
-)
-
-const Topics = ({ match }) => (
-  <div>
-    <h2>Topics</h2>
+    <h2>Tacos</h2>
     <ul>
       <li>
-        <Link to={`${match.url}/rendering`}>
-          Rendering with React
-        </Link>
+        <Link to="/tacos/bus">Bus</Link>
       </li>
       <li>
-        <Link to={`${match.url}/components`}>
-          Components
-        </Link>
-      </li>
-      <li>
-        <Link to={`${match.url}/props-v-state`}>
-          Props v. State
-        </Link>
+        <Link to="/tacos/cart">Cart</Link>
       </li>
     </ul>
 
-    <Route path={`${match.path}/:topicId`} component={Topic}/>
-    <Route exact path={match.path} render={() => (
-      <h3>Please select a topic.</h3>
-    )}/>
   </div>
-)
+);
 
-const BasicExample = () => (
-  <Router>
+const Bus = ({match}) => { 
+  console.log('bus',match.url)
+  return <h3>Bus</h3> }
+const Cart = ({match}) => { return <h3>Cart</h3>; }
+
+////////////////////////////////////////////////////////////
+// then our route config
+const routes = [
+  {
+    path: "sandwiches",
+    component: Sandwiches,
+    exact: true,
+    forceRefresh: false
+  },
+  {
+    path: "/tacos",
+    component: Tacos,
+    exact: true,
+    forceRefresh: false,
+    routes: [
+      {
+        path: "/bus",
+        component: Bus,
+        exact: true ,
+        forceRefresh: false
+      },
+      {
+        path: "/cart",
+        component: Cart,
+        exact: true ,
+        forceRefresh: false
+      }
+    ]
+  }
+];
+
+const routesFunc = (routes,prePath,memory) => {
+  if(!memory)
+    memory=[]
+  routes.forEach(r=>{
+    const { routes ,...props } = r
+    memory.push({...props,path:prePath+r.path})
+    if(r.routes&&r.routes instanceof Array)
+      routesFunc(r.routes,prePath+r.path,memory)
+  })
+  return memory
+}
+
+console.log(routesFunc(routes,''))
+
+// wrap <Route> and use this everywhere instead, then when
+// sub routes are added to any route it'll work
+
+const RouteConfigExample = () => (
+  <Router basename = {'/'}>
     <div>
-      <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/about">About</Link></li>
-        <li><Link to="/topics">Topics</Link></li>
-      </ul>
 
-      <hr/>
-
-      <Route exact path="/" component={Home}/>
-      <Route path="/about" component={About}/>
-      <Route path="/topics" component={Topics}/>
+      <Switch>
+        {routesFunc(routes,'').slice().map(r=><Route {...r} ></Route>)}
+      </Switch>
     </div>
   </Router>
-)
-export default BasicExample
+);
+
+export default RouteConfigExample;
