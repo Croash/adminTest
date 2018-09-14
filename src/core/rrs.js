@@ -3,7 +3,7 @@ import ReactDOM,{ PropTypes } from 'react-dom'
 import { Provider, connect } from 'react-redux'
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
 import createSagaMiddleware, { takeEvery, takeLatest } from 'redux-saga'
-import { Router, DefaultRoute, browserHistory, hashHistory } from 'react-router'
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { fork } from 'redux-saga/effects'
 
 // redux app
@@ -79,13 +79,15 @@ const react_app = {
       app.context.router.push(uri)
     }
     
-    const routerType = app.load_dict('config')['router'] || 'browser'
-    const router = (typeof routerType === 'string') ? {
-      browser: browserHistory,
-      hash: hashHistory
-    }[routerType] : routerType
+    // const routerType = app.load_dict('config')['router'] || 'browser'
+    // const router = (typeof routerType === 'string') ? {
+    //   browser: browserHistory,
+    //   hash: hashHistory
+    // }[routerType] : routerType
 
-    cb(null, { ...context, router })
+    cb(null, { ...context
+      // , router 
+    })
   },
   start: (app) => () => {
     // init container
@@ -95,12 +97,8 @@ const react_app = {
     }
 
     const rs = app.load_dict_list('routers')
-    const find_childs = (path) => {
-      return (rs[path] || []).map((r) => {
-        const childs = find_childs((path == '@' ? '' : path) + r.path)
-        return childs.length > 0 ? { ...r, childRoutes: [ ...(r.childRoutes||[]), ...childs ] } : r
-      })
-    }
+
+    //need trans rs to routesFunc 
     const routesFunc = (routes,prePath,memory) => {
       if(!memory)
         memory=[]
@@ -113,9 +111,16 @@ const react_app = {
       return memory
     }
     console.log(rs)
-    const routers = find_childs('@')
-    let AppComponent = (routers && routers.length) ?
-      () => <Router history={app.context.router} routes={routers[0]}/> :
+    const routersConfig = routesFunc(routes,'')
+    // const routers = find_childs('@')
+    let AppComponent = (routersConfig && routersConfig.length) ?
+      () => (<Router basename = {'/'}>
+        <div>
+          <Switch>
+            {routersConfig.map(r=><Route {...r} ></Route>)}
+          </Switch>
+        </div>
+      </Router>) :
       (app.load_dict('components').Main || (() => <span>Please config routers or Main component.</span>))
 
     const RootComponent = app.load_list('root_component').reduce((PrevComponent, render) => {
