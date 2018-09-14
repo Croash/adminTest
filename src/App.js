@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
+const Base = (content)=>()=>(<h2>{content}</h2>)
 const Sandwiches = () => <h2>Sandwiches</h2>;
 
 const Tacos = ({ routes }) => (
@@ -27,8 +28,14 @@ const Cart = ({match}) => { return <h3>Cart</h3>; }
 // then our route config
 const routes = [
   {
-    path: "sandwiches",
-    component: Sandwiches,
+    path: "/",
+    component: Base('Main'),
+    exact: true,
+    forceRefresh: false
+  },
+  {
+    path: "/sandwiches",
+    component: Base('Sandwiches'),
     exact: true,
     forceRefresh: false
   },
@@ -40,13 +47,13 @@ const routes = [
     routes: [
       {
         path: "/bus",
-        component: Bus,
+        component: Base('Bus'),
         exact: true ,
         forceRefresh: false
       },
       {
         path: "/cart",
-        component: Cart,
+        component: Base('Cart'),
         exact: true ,
         forceRefresh: false
       }
@@ -74,9 +81,8 @@ console.log(routesFunc(routes,''))
 const RouteConfigExample = () => (
   <Router basename = {'/'}>
     <div>
-
       <Switch>
-        {routesFunc(routes,'').slice().map(r=><Route {...r} ></Route>)}
+        {routesFunc(routes,'').map(r=><Route {...r} ></Route>)}
       </Switch>
     </div>
   </Router>
