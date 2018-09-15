@@ -3,7 +3,7 @@ import ReactDOM,{ PropTypes } from 'react-dom'
 import { Provider, connect } from 'react-redux'
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
 import createSagaMiddleware, { takeEvery, takeLatest } from 'redux-saga'
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
 import { fork } from 'redux-saga/effects'
 
 // redux app
@@ -125,12 +125,18 @@ const react_app = {
         <div>
           <Switch>
             {routersConfig.map(r=><Route {...r} ></Route>)}
+            <Route exact path='/redirect' render={
+              () => <Redirect to="/" component={()=>(<h1>redirect</h1>)} />
+            } />
           </Switch>
         </div>
       </Router>) :
       (app.load_dict('components').Main || (() => <span>Please config routers or Main component.</span>))
-
+    console.log(app.load_list('root_component'))
     const RootComponent = app.load_list('root_component').reduce((PrevComponent, render) => {
+      // root_component is a hoc which mean to inject store to the rendered component
+      // however in most cases, one precomponent is enough
+      // because inject one store is ok(one more stores are not needed  in most cases)
       return render(PrevComponent)
     }, AppComponent)
 
