@@ -35,7 +35,7 @@ const plugin = {
       exact: true,
       routes: [
         { 
-          path:'lalala',
+          path:'/lalala',
           exact: true,
           component: ShowComponent
         }

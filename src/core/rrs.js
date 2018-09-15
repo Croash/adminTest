@@ -97,7 +97,7 @@ const react_app = {
     }
 
     const rs = app.load_dict_list('routers')
-
+    const te = app.load_list('testConfig')
     //need trans rs to routesFunc 
     const routesFunc = (routes,prePath,memory) => {
       if(!memory)
@@ -110,9 +110,16 @@ const react_app = {
       })
       return memory
     }
-    console.log(rs)
-    const routersConfig = routesFunc(routes,'')
-    // const routers = find_childs('@')
+    const find_childs = (path) => {
+      return (rs[path] || []).map((r) => {
+        const childs = find_childs((path == '@' ? '' : path) + r.path)
+        return childs.length > 0 ? { ...r, routes: [ ...(r.routes||[]), ...childs ] } : r
+      })
+    }
+    const routers = find_childs('@')
+    console.log(rs,te,routers,routesFunc(routers,''))
+    const routersConfig = routesFunc(routers,'')
+
     let AppComponent = (routersConfig && routersConfig.length) ?
       () => (<Router basename = {'/'}>
         <div>
@@ -124,6 +131,7 @@ const react_app = {
       (app.load_dict('components').Main || (() => <span>Please config routers or Main component.</span>))
 
     const RootComponent = app.load_list('root_component').reduce((PrevComponent, render) => {
+      console.log(render)
       return render(PrevComponent)
     }, AppComponent)
 
