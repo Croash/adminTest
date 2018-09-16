@@ -24,10 +24,18 @@ const plugin = {
       return state
     }
   },
+  /*
+   **
+   *
+   * ways to config routers
+   * 1. property name is 'routers'
+   * 2. @ is initial routes
+   * 
+   */ 
   routers: {
     '@' : {
       path: '/',
-      component: HelloComp('///'),
+      component: HelloComp('initRoute'),
       exact: true
     },
     '/' : {

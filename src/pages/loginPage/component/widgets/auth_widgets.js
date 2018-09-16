@@ -28,6 +28,7 @@ class InputWithIcon extends Component {
   }
 
   render() {
+    console.log('render')
     const classes = { margin: { margin:'8px' } }
     const { loginstateUpdate } = this.props
     return (<div className="child">
@@ -76,4 +77,4 @@ class InputWithIcon extends Component {
   }
 }
 
-export default  withRouter( withStyles(styles)(InputWithIcon) ) 
+export default  withStyles(styles)(InputWithIcon) 
