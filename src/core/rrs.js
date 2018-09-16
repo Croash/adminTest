@@ -12,6 +12,7 @@ const redux_app = {
 
     const devtools = window.devToolsExtension || (() => noop => noop)
     const enhancers = [
+      //load_list middleware can customize midware
       applyMiddleware(...app.load_list('middlewares')),
       ...app.load_list('store_enhancers'),
       devtools()
@@ -98,15 +99,15 @@ const react_app = {
 
     const rs = app.load_dict_list('routers')
     //need trans rs to routesFunc 
-
     const find_childs = (path) => {
       return (rs[path] || []).map((r) => {
         const childs = find_childs((path == '@' ? '' : path) + r.path)
+        // console.log(childs,r.path)
         return childs.length > 0 ? { ...r, routes: [ ...(r.routes||[]), ...childs ] } : r
       })
     }
     const routers = find_childs('@')
-    // console.log(rs,te,routers,routesFunc(routers,''))
+ 
     const routesFunc = (routes,prePath,memory) => {
       if(!memory)
         memory=[]
@@ -118,6 +119,7 @@ const react_app = {
       })
       return memory
     }
+    // console.log(rs,routers,routesFunc(routers,''))
     const routersConfig = routesFunc(routers,'')
 
     let AppComponent = (routersConfig && routersConfig.length) ?
@@ -132,7 +134,7 @@ const react_app = {
         </div>
       </Router>) :
       (app.load_dict('components').Main || (() => <span>Please config routers or Main component.</span>))
-    console.log(app.load_list('root_component'))
+    // console.log(app.load_list('root_component'))
     const RootComponent = app.load_list('root_component').reduce((PrevComponent, render) => {
       // root_component is a hoc which mean to inject store to the rendered component
       // however in most cases, one precomponent is enough

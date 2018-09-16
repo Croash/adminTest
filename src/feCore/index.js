@@ -4,16 +4,21 @@ import ShowComponent from './component'
 import OtherComp from './other'
 
 const HelloComp = (content)=>()=>{
-  <div>{content}</div>
+  const { store } = app.context
+  return (
+    <button onClick={()=>{ store.dispatch({ type:'ADD', count: 22 }) }}>{ content }</button>
+  )
 }
 
+
 const plugin = {
-  start: ()=>(app)=>{
+  start: (app) => () => {
     console.log(app)
   },
   reducers: {
     count: (state=0, action) => {
       if(action.type == 'ADD') {
+        console.log(state + action.count)
         return state + action.count
       }
       return state
@@ -22,24 +27,25 @@ const plugin = {
   routers: {
     '@' : {
       path: '/',
-      component: ()=>(<div>notgh</div>),
+      component: HelloComp('///'),
       exact: true
-      // ,
-      // indexRoute: {
-      //   onEnter: (_, replace) => replace({ pathname: '/app' })
-      // }
     },
     '/' : {
       path: 'app',
-      component: ShowComponent,
+      component: HelloComp('app'),
       exact: true,
       routes: [
         { 
-          path:'/lalala',
+          path:'/post',
           exact: true,
-          component: ShowComponent
+          component: HelloComp('post')
         }
       ]
+    },
+    '/app': {
+      path: '/post1',
+      component: HelloComp('app/post1'),
+      exact: true
     }
   }
 }
