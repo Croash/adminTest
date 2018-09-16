@@ -14,5 +14,21 @@ app
       }
     }
   })
+  .use({
+    routers: {
+      '/': {
+        path: 'sg',
+        exact: true,
+        component: () => (<div>test</div>),
+        routes: [
+          { 
+            path:'/post',
+            exact: true,
+            component: ()=>(<div>lalala</div>)
+          }
+        ]
+      },
+    }
+  })
   .use(authPage)
   .start({ container: '#root' })

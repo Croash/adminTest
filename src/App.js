@@ -7,9 +7,22 @@ app
   .use(core)
   .use({
     routers: {
-      '/sg': {
-        path: '/',
+      '/': {
+        path: 'sg',
+        exact: true,
+        component: () => (
+        <div>test</div>),
+        routes: [
+          { 
+            path:'/post',
+            exact: true,
+            component: ()=>(<div>lalala</div>)
+          }
+        ]
       },
     },
+    component: {
+
+    }
   })
   .start({ container: '#app' })
