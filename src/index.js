@@ -2,6 +2,7 @@ import React,{ Component } from 'react'
 import { app } from './core'
 import feCore from './feCore'
 import authPage from './pages/loginPage'
+import layoutPage from './layout'
 
 app
   .use(feCore)
@@ -31,4 +32,5 @@ app
     }
   })
   .use(authPage)
+  .use(layoutPage)
   .start({ container: '#root' })
