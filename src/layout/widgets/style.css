@@ -1,0 +1,50 @@
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://example.com/MaterialIcons-Regular.eot);
+  /* For IE6-8 */
+  src: local('Material Icons'), local('MaterialIcons-Regular'), url(https://example.com/MaterialIcons-Regular.woff2) format('woff2'), url(https://example.com/MaterialIcons-Regular.woff) format('woff'), url(https://example.com/MaterialIcons-Regular.ttf) format('truetype');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+.authWrap { 
+  /*让元素渲染为表格单元格*/
+  display:table-cell;
+  /*设置文本水平居中*/
+  text-align:center; 
+  /*设置文本垂直居中*/
+  vertical-align:middle;     
+} 
+
+html {
+  min-height: 100%;
+  position: relative;
+}
+
+.content {
+  border: 2px red;
+  padding-left: 15%; 
+  padding-right: 15%; 
+  padding-top: 64px;
+  min-height: 700px;
+  padding-bottom: 300px;
+}
+body {
+  margin: 0px;
+}

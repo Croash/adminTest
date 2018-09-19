@@ -16,7 +16,7 @@ class NavigationMenu extends Component {
     super(props)
   }
   render() {
-    const { relationUpdate, relation } = this.props
+    const { relationUpdate, relation={ open:true } } = this.props
     const { open } = relation
     return (
       <Drawer

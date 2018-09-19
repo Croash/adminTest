@@ -12,7 +12,7 @@ export default class DrawerUndockedExample extends Component {
 
   render() {
 
-    let { inputEle, update, relation, relationUpdate } = this.props
+    let { inputEle, update, relation={ open:false }, relationUpdate=()=>{} } = this.props
     const { open } = relation
     return (
       <div>

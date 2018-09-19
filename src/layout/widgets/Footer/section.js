@@ -39,7 +39,7 @@ class Section extends Component {
       style,
       useContent=true,
       contentType,
-      contentStyle,
+      contentStyle={},
       width,
       ...other
     } = this.props
@@ -51,7 +51,7 @@ class Section extends Component {
       content =
         React.createElement(
           contentType,
-          { style: Object.assign(styles.content, contentStyle) },
+          { style: { ...styles.content, ...contentStyle } },
           this.props.children
         )
     } else {
