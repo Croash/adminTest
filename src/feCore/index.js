@@ -13,7 +13,6 @@ const HelloComp = (content)=>()=>{
 
 const plugin = {
   start: (app) => () => {
-    console.log(app)
   },
   reducers: {
     count: (state=0, action) => {

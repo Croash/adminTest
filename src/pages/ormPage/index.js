@@ -1,22 +1,25 @@
 import React,{ Component } from 'react'
 // import { StoreWrap } from '../../core'
-import Auth from './component'
+import comp from './component'
+import reducers from './reducers'
+const { OrmComp } = comp
 
 export default {
   on_create_store: (app) => () => {
     const { store } = app.context
     store.dispatch({
       type:'@@admin_init',
-      namespace:'login',
+      namespace:'orm',
       payload: {
         t:'test'
       }
     })
   },
+  reducers,
   routers: {
     '/': {
-      path: 'login',
-      component: Auth
+      path: 'orm',
+      component: OrmComp
     }
   }
 }

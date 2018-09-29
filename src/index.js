@@ -3,6 +3,7 @@ import { app } from './core'
 import feCore from './feCore'
 import authPage from './pages/loginPage'
 import layoutPage from './layout'
+import OrmPage from './pages/ormPage'
 
 app
   .use(feCore)
@@ -33,4 +34,5 @@ app
   })
   .use(authPage)
   .use(layoutPage)
+  .use(OrmPage)
   .start({ container: '#root' })
