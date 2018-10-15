@@ -4,6 +4,8 @@ import feCore from './feCore'
 import authPage from './pages/loginPage'
 import layoutPage from './layout'
 import OrmPage from './pages/ormPage'
+import Pagination from './pages/pagination'
+import Content from './pages/content'
 
 app
   .use(feCore)
@@ -35,4 +37,6 @@ app
   .use(authPage)
   .use(layoutPage)
   .use(OrmPage)
+  .use(Pagination)
+  .use(Content)
   .start({ container: '#root' })

@@ -5,8 +5,11 @@ export default {
   components: {
     layout
   },
+  layout: {
+    layout
+  },
   routers: (app) => {
-    const { layout } = app.load_dict('components')
+    const { layout } = app.load_dict('layout')
     return {
       '/' : {
         path: 'layout',

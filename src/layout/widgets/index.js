@@ -8,6 +8,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import './style.css'
 
 const _wrap_component = ({InputComponent, ...props}) => {
+  console.log(InputComponent)
   return <MuiThemeProvider>
     <Wrap {...props}>
       <Header/>
