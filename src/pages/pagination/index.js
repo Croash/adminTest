@@ -7,6 +7,9 @@ const model = {
   name: 'blog_pagination',
   // effects: {},
   reducers: {},
+  initial_state: {
+    dd: 22
+  },
   routers: (app) => {
     const { layout:Layout } = app.load_dict('layout')
     return {

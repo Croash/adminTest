@@ -11,7 +11,7 @@ export default {
       type:'@@admin_init',
       namespace:'orm',
       payload: {
-        t:'test'
+        t:'test_orm'
       }
     })
   },

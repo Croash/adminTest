@@ -1,6 +1,7 @@
 import React,{ Component } from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router'
+import { app } from '../../core/index'
 // import Writer from './Writer'
 // import Map from './Map'
 // import Charts from './Charts'
@@ -28,19 +29,30 @@ const contentStyle = {
 
 class Content extends Writer {
 
+  constructor(props) {
+    super(props)
+    this.store = app.context.store
+    this.namespace = 'content'
+  }
+
   static contextTypes = {
     router: PropTypes.object.isRequired,
     store: PropTypes.object.isRequired
   }
 
   render() {
+    const data = this.store.getState().data
+    const { page=0, content = [] } = data[this.namespace].pagination
     const { route:{ match:{ params:{ cate } } } } = this.context.router
-    const { page=0, content = [] }  = this.context.store.getState().pagination
+    // const { page=0, content = [] }  = this.store.getState()[this.namespace].pagination
 
-    let ShowContent = compList[cate]!=undefined ? compList[cate]:compList['Writer']
+    let ShowContent = cate? ( compList[cate]!=undefined ? compList[cate]:compList['Writer'] ) 
+      : null
+    console.log(ShowContent,cate)
     return ( 
       <div className={'content'}>
-        <ShowContent { ...this.props } />
+        {/* { ShowContent? <ShowContent { ...this.props } /> : <ShowContent/> } */}
+        <Map />
       </div>
     )
   }

@@ -38,19 +38,19 @@ const plugin = {
       exact: true
     },
     '/' : {
-      path: 'app/',
+      path: 'app',
       component: HelloComp('app'),
       exact: true,
       routes: [
         { 
-          path:'post',
+          path:'/post',
           exact: true,
           component: HelloComp('post')
         }
       ]
     },
-    '/app/': {
-      path: 'post1',
+    '/app': {
+      path: '/post1',
       component: HelloComp('app/post1'),
       exact: true
     }

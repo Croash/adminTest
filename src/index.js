@@ -1,6 +1,6 @@
 import React,{ Component } from 'react'
 import { app } from './core'
-import feCore from './feCore'
+import initPage from './pages/initPage'
 import authPage from './pages/loginPage'
 import layoutPage from './layout'
 import OrmPage from './pages/ormPage'
@@ -8,7 +8,7 @@ import Pagination from './pages/pagination'
 import Content from './pages/content'
 
 app
-  .use(feCore)
+  .use(initPage)
   .use({
     routers: {
       '/' : {
