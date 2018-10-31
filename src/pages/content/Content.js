@@ -6,7 +6,7 @@ import { app } from '../../core/index'
 // import Map from './Map'
 // import Charts from './Charts'
 
-import widgets from './widgets'
+import widgets from './pages'
 const { Writer,
   Map,
   Charts } = widgets
@@ -51,8 +51,9 @@ class Content extends Writer {
     console.log(ShowContent,cate)
     return ( 
       <div className={'content'}>
-        {/* { ShowContent? <ShowContent { ...this.props } /> : <ShowContent/> } */}
-        <Map />
+        { ShowContent? <ShowContent { ...this.props } /> : <ShowContent/> }
+        {/* <Map /> */}
+        {/* { <Writer/> } */}
       </div>
     )
   }

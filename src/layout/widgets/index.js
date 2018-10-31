@@ -8,10 +8,11 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import './style.css'
 
 const _wrap_component = ({InputComponent, ...props}) => {
+  console.log(props,'props')
   return <MuiThemeProvider>
     <Wrap {...props}>
       <Header/>
-      { InputComponent?<InputComponent/>:null }
+      {props.children}
       <Footer/>
       <SideBar/>
     </Wrap>

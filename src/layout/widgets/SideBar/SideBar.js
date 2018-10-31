@@ -75,9 +75,9 @@ class ListClick extends Component {
         key={index}
           primaryText={item.title}
         onClick = { () => {  
-          this.context.router.history.push(`/post/${item.title}`)
+          this.context.router.history.push(`/Content/${item.title}`)
           // console.log(this.context.router.route.match.params,this.props.relation)
-          relationUpdate({ cate: item.title })
+          // relationUpdate({ cate: item.title })
  
         } }
         value={`/posts/item._id/${index}`} leftIcon={
