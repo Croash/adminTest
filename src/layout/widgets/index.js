@@ -5,6 +5,8 @@ import Header from './Header'
 import SideBar from './SideBar'
 import Wrap from './Wrap'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+
+import Paper from '@material-ui/core/Paper';
 import './style.css'
 
 const _wrap_component = ({InputComponent, ...props}) => {
@@ -12,7 +14,9 @@ const _wrap_component = ({InputComponent, ...props}) => {
   return <MuiThemeProvider>
     <Wrap {...props}>
       <Header/>
+      <Paper>
       {props.children}
+      </Paper>
       <Footer/>
       <SideBar/>
     </Wrap>

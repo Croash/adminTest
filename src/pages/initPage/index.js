@@ -35,24 +35,17 @@ const plugin = {
     '@' : {
       path: '/',
       component: HelloComp('initRoute'),
-      exact: true
-    },
-    '/' : {
-      path: 'app',
-      component: HelloComp('app'),
+      // redirect: 
       exact: true,
-      routes: [
-        { 
-          path:'/post',
-          exact: true,
-          component: HelloComp('post')
-        }
-      ]
+      redirect: true,
+      to: '/login'
     },
     '/app': {
       path: '/post1',
       component: HelloComp('app/post1'),
-      exact: true
+      exact: true,
+      redirect: true,
+      to: '/',
     }
   }
 }

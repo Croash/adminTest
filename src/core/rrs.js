@@ -127,7 +127,15 @@ const react_app = {
       () => (<Router basename = {'/'}>
         <div>
           <Switch>
-            {routersConfig.map(r=><Route {...r} ></Route>)}
+            {routersConfig.map(r=>{
+              if(!r.redirect) {
+                return <Route {...r} ></Route>
+              }
+              else {
+                console.log(r)
+                return <Redirect {...r}></Redirect>
+              }
+            })}
             <Route exact path='/redirect' render={
               () => <Redirect to="/" component={()=>(<h1>redirect</h1>)} />
             } />

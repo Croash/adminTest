@@ -36,7 +36,7 @@ const model = {
               console.log(match)
               const { cate } = match
               return <Layout >
-                <Content/>
+                <Content cate={cate}/>
               </Layout> 
             }
           }

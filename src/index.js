@@ -1,7 +1,7 @@
 import React,{ Component } from 'react'
 import { app } from './core'
 import initPage from './pages/initPage'
-import authPage from './pages/loginPage'
+import authPage from './pages/login'
 import layoutPage from './layout'
 import OrmPage from './pages/ormPage'
 import Pagination from './pages/pagination'

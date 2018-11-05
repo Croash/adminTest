@@ -33,6 +33,7 @@ class Content extends Writer {
     super(props)
     this.store = app.context.store
     this.namespace = 'content'
+    this.cate = props.cate
   }
 
   static contextTypes = {

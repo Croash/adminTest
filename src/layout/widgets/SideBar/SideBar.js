@@ -85,9 +85,7 @@ class ListClick extends Component {
             >{item.logo}</FontIcon>
       } />
     )
-
   }
-
 }
 
 export default SideBar

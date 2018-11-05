@@ -1,5 +1,5 @@
 import layout from './component'
-import widgets from './widgets';
+import widgets from './widgets'
 
 export default {
   components: {

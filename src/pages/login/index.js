@@ -13,10 +13,15 @@ export default {
       }
     })
   },
-  routers: {
-    '/': {
-      path: 'login',
-      component: Auth
+  routers: (app) => {
+    return {
+      '/': {
+        path: 'login',
+        component: ()=>{
+          const { layout:Layout } = app.load_dict('layout')
+          return <Layout><Auth/></Layout>
+        }
+      }
     }
   }
 }
