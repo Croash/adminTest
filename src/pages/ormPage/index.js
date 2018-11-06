@@ -1,7 +1,7 @@
 import React,{ Component } from 'react'
 // import { StoreWrap } from '../../core'
 import comp from './component'
-import reducers from './reducers'
+// import reducers from './reducers'
 const { OrmComp } = comp
 
 export default {
@@ -15,7 +15,7 @@ export default {
       }
     })
   },
-  reducers,
+  // reducers,
   routers: {
     '/': {
       path: 'orm',

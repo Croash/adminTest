@@ -10,7 +10,6 @@ import Paper from '@material-ui/core/Paper';
 import './style.css'
 
 const _wrap_component = ({InputComponent, ...props}) => {
-  console.log(props,'props')
   return <MuiThemeProvider>
     <Wrap {...props}>
       <Header/>

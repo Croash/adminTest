@@ -1,5 +1,6 @@
 import React,{ Component } from 'react'
 import Content from './Content'
+import reducers from './reducers'
 import { Redirect } from 'react-dom'
 
 const model = {
@@ -8,14 +9,20 @@ const model = {
   on_create_store: (app) => () => {
     const { store } = app.context
     store.dispatch({
-      type:'@@admin_init',
-      namespace:'content',
+      type:'@@admin_data',
+      namespace:'article',
       payload: {
-        pagination: {}
+        '1st': {
+          description: '',
+          main: '',
+          comment: {
+            
+          }
+        }
       }
     })
   },
-  reducers: {},
+  reducers,
   routers: (app) => {
     const { layout:Layout } = app.load_dict('layout')
     return {
@@ -33,7 +40,6 @@ const model = {
             path:'/:cate',
             exact: true,
             component: ({match})=>{
-              console.log(match)
               const { cate } = match
               return <Layout >
                 <Content cate={cate}/>
@@ -41,11 +47,6 @@ const model = {
             }
           }
         ]
-      },
-      '/Content': {
-        path: '/Map',
-        exact: true,
-        component: ()=>(<div>Children</div>),
       }
     }
   }

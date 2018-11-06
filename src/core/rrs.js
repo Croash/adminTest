@@ -107,7 +107,7 @@ const react_app = {
       })
     }
     const routers = find_childs('@')
-    console.log(routers)
+    // console.log(routers)
     const routesFunc = (routes,prePath,memory) => {
       if(!memory)
         memory=[]
@@ -121,7 +121,7 @@ const react_app = {
     }
     // console.log(rs,routers,routesFunc(routers,''))
     const routersConfig = routesFunc(routers,'')
-    console.log(routersConfig)
+    // console.log(routersConfig)
 
     let AppComponent = (routersConfig && routersConfig.length) ?
       () => (<Router basename = {'/'}>
@@ -132,7 +132,7 @@ const react_app = {
                 return <Route {...r} ></Route>
               }
               else {
-                console.log(r)
+                // console.log(r)
                 return <Redirect {...r}></Redirect>
               }
             })}
